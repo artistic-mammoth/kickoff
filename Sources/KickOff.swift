@@ -9,7 +9,8 @@ struct KickOff: AsyncParsableCommand {
         commandName: "kickoff",
         subcommands: [
             WheelTool.self,
-            AddTool.self
+            AddTool.self,
+            TasksTool.self
         ],
         defaultSubcommand: WheelTool.self
     )
