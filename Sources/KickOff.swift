@@ -4,10 +4,13 @@
 import ArgumentParser
 
 @main
-struct WheelOfTasks: AsyncParsableCommand {
+struct KickOff: AsyncParsableCommand {
     static let configuration: CommandConfiguration = CommandConfiguration(
-        commandName: "wheelOfTasks",
-        subcommands: [WheelTool.self, LoopedWheelTool.self],
+        commandName: "kickoff",
+        subcommands: [
+            WheelTool.self,
+            AddTool.self
+        ],
         defaultSubcommand: WheelTool.self
     )
 }

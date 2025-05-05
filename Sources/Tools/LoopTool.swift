@@ -1,6 +1,6 @@
 //
-//  LoopedWheelTool.swift
-//  WheelOfTasks
+//  LoopTool.swift
+//  wheelOfTasks
 //
 //  Created by Mikhaylov Aleksandr on 05.05.2025.
 //
@@ -9,17 +9,21 @@ import Factory
 import ArgumentParser
 import ANSITerminal
 
-struct LoopedWheelTool: AsyncParsableCommand {
-    static let configuration: CommandConfiguration = CommandConfiguration(
-        commandName: "loopedWheelTool"
-    )
+@available(*, deprecated, message: "Redo as separate tools")
+struct LoopTool: AsyncParsableCommand {
+    static var configuration: CommandConfiguration {
+        CommandConfiguration(
+            commandName: "loop"
+        )
+    }
     
     public func run() async throws {
         await loop()
     }
 }
 
-private extension LoopedWheelTool {
+@available(*, deprecated, message: "Redo as separate tools")
+private extension LoopTool {
     func loop() async {
         @Injected(\.userCommandParser) var userCommandParser
         while true {

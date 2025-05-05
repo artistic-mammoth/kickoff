@@ -17,8 +17,9 @@ final actor WheelRepository {
     private var options: WheelOptions = []
     
     init() {
-        Task {
-            await loadFromDisk()
+        // TODO: Make it safe
+        SyncTask { [weak self] in
+            await self?.loadFromDisk()
         }
     }
 }
@@ -64,19 +65,8 @@ private extension WheelRepository {
     }
     
     func getSaveFile() throws -> File {
-        let folder = try Folder.current.createSubfolderIfNeeded(withName: "storage")
+        let folder = try Folder.home.createSubfolderIfNeeded(withName: ".kickoff")
         let file = try folder.createFileIfNeeded(withName: "save.json")
         return file
     }
-    
-//    static func prepareRepo() -> WheelOptions {
-//        var opt: WheelOptions = []
-//        (0...10).forEach {
-//            opt.append(WheelOption(
-//                name: "option \($0)",
-//                type: Bool.random() ? .job : .rest
-//            ))
-//        }
-//        return opt
-//    }
 }

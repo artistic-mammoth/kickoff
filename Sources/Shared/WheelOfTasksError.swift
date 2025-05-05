@@ -7,14 +7,14 @@
 
 import Foundation
 
-enum WheelOfTasksError: Error {
+enum KickOffError: Error {
     case any
 }
 
-extension WheelOfTasksError: LocalizedError {
+extension KickOffError: LocalizedError {
     var errorDescription: String? {
         switch self {
-        case .any: "ANY"
+        case .any: "Something went wrong"
         }
     }
 }

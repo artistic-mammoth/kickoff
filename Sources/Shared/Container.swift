@@ -8,6 +8,7 @@
 import Factory
 
 extension Container {
+    @available(*, deprecated, message: "Redo in tools")
     var userCommandParser: Factory<IUserCommandParser> {
         self { UserCommandParser() }
             .shared

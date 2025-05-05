@@ -8,15 +8,18 @@
 import Factory
 import ANSITerminal
 
+@available(*, deprecated, message: "Redo in tools")
 protocol IUserCommandParser {
     func parse(_ input: String) async throws(UserCommandParserError)
 }
 
+@available(*, deprecated, message: "Redo in tools")
 final class UserCommandParser {
     
     @Injected(\.wheelEngine) private var wheelEngine
 }
 
+@available(*, deprecated, message: "Redo in tools")
 extension UserCommandParser: IUserCommandParser {
     func parse(_ input: String) async throws(UserCommandParserError) {
         let clearInput = input
@@ -39,6 +42,7 @@ extension UserCommandParser: IUserCommandParser {
     }
 }
 
+@available(*, deprecated, message: "Redo in tools")
 private extension UserCommandParser {
     func handle(_ command: UserCommand) async throws {
         switch command {

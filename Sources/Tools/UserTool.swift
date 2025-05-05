@@ -1,5 +1,5 @@
 //
-//  WheelTool.swift
+//  UserTool.swift
 //  WheelOfTasks
 //
 //  Created by Mikhaylov Aleksandr on 05.05.2025.
@@ -8,10 +8,13 @@
 import Factory
 import ArgumentParser
 
-struct WheelTool: AsyncParsableCommand {
-    static let configuration: CommandConfiguration = CommandConfiguration(
-        commandName: "wheelTool"
-    )
+@available(*, deprecated, message: "Redo as separate tools")
+struct UserTool: AsyncParsableCommand {
+    static var configuration: CommandConfiguration {
+        CommandConfiguration(
+            commandName: "user"
+        )
+    }
     
     @Argument(help: .init(stringLiteral: inputArgumentHelp))
     public var commad: String
@@ -22,6 +25,7 @@ struct WheelTool: AsyncParsableCommand {
     }
 }
 
+@available(*, deprecated, message: "Redo as separate tools")
 fileprivate var inputArgumentHelp: String {
         """
         Based command:

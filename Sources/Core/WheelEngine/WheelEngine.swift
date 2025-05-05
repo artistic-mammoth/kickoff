@@ -37,7 +37,7 @@ extension WheelEngine: IWheelEngine {
         let type = WheelType(rawValue: cleanType)
         
         guard let type else {
-            throw WheelOfTasksError.any
+            throw KickOffError.any
         }
         
         let option = WheelOption(

@@ -7,7 +7,7 @@
 
 protocol IRandomizeClient {
     func calculateIndex(upto max: Int) throws -> Int
-    func calculate<T>(for elements: [RandomElement<T>]) throws -> T
+    func calculate<T>(for elements: RandomElements<T>) throws -> T
 }
 
 struct RandomizeClient { }
@@ -15,13 +15,13 @@ struct RandomizeClient { }
 extension RandomizeClient: IRandomizeClient {
     func calculateIndex(upto max: Int) throws -> Int {
         guard max != 0 else {
-            throw WheelOfTasksError.any
+            throw KickOffError.any
         }
         
         return Int.random(in: 0..<max)
     }
     
-    func calculate<T>(for elements: [RandomElement<T>]) throws -> T {
+    func calculate<T>(for elements: RandomElements<T>) throws -> T {
         var computedElements: [T] = []
         
         elements.forEach {
@@ -31,7 +31,7 @@ extension RandomizeClient: IRandomizeClient {
         let choosedIndex = try calculateIndex(upto: computedElements.endIndex)
         
         guard choosedIndex < computedElements.endIndex else {
-            throw WheelOfTasksError.any
+            throw KickOffError.any
         }
         
         return computedElements[choosedIndex]

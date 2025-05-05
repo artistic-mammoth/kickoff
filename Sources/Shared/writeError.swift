@@ -7,6 +7,7 @@
 
 import ANSITerminal
 
+@available(*, deprecated, message: "Redo in tools")
 func writeError(_ error: String...) {
     clearLine()
     write(error.joined(separator: " ").bold.red)

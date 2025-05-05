@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "WheelOfTasks",
+    name: "kickoff",
     platforms: [
         .macOS(.v15)
     ],
@@ -18,7 +18,7 @@ let package = Package(
     ],
     targets: [
         .executableTarget(
-            name: "WheelOfTasks",
+            name: "kickoff",
             dependencies: [
                 // TODO: TRY
                 // .product(name: "ConsoleKit", package: "console-kit"),
