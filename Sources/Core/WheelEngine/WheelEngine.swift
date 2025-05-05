@@ -50,7 +50,9 @@ extension WheelEngine: IWheelEngine {
     
     func printAll() async {
         let all = await wheelRepository.get()
-        print(all)
+        all.forEach {
+            print($0.type.readable, $0.name)
+        }
     }
 }
 

@@ -13,17 +13,20 @@ struct WheelTool: AsyncParsableCommand {
         commandName: "wheelTool"
     )
     
-    @Argument(help: "")
+    @Argument(help: .init(stringLiteral: inputArgumentHelp))
     public var commad: String
     
     public func run() async throws {
         @Injected(\.userCommandParser) var userCommandParser
-        do {
-            try await userCommandParser.parse(commad)
-        } catch .noCommand {
-            writeError("No command")
-        } catch {
-            writeError("ERROR", error.localizedDescription)
-        }
+        try await userCommandParser.parse(commad)
     }
+}
+
+fileprivate var inputArgumentHelp: String {
+        """
+        Based command:
+        \(UserCommand.allCases.map {
+            "- " + $0.rawValue + "\n"
+        }.joined())
+        """
 }
