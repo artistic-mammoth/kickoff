@@ -13,7 +13,7 @@ let package = Package(
         // .package(url: "https://github.com/vapor/console-kit.git", from: "4.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
         .package(url: "https://github.com/johnsundell/files.git", from: "4.0.0"),
-        .package(url: "https://github.com/pakLebah/ANSITerminal.git", exact: "0.0.3"),
+        .package(url: "https://github.com/onevcat/Rainbow.git", from: "4.0.0"),
         .package(url: "https://github.com/hmlongco/Factory.git", from: "2.0.0"),
     ],
     targets: [
@@ -24,7 +24,7 @@ let package = Package(
                 // .product(name: "ConsoleKit", package: "console-kit"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Files", package: "files"),
-                "ANSITerminal",
+                "Rainbow",
                 "Factory",
             ])
     ]

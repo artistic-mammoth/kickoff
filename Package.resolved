@@ -1,15 +1,6 @@
 {
-  "originHash" : "b2bd19caf7b4b27ceae8d1ac0b4aac3ee4ec1f1f66076e75430298884628c686",
+  "originHash" : "7ffdfcde5f7d63cee8cc1ede973e4a35d8f7c2a5511c9665d4551f349fa7a060",
   "pins" : [
-    {
-      "identity" : "ansiterminal",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pakLebah/ANSITerminal.git",
-      "state" : {
-        "revision" : "8e24fab68c660eca1244a95019ec69a11400d62b",
-        "version" : "0.0.3"
-      }
-    },
     {
       "identity" : "factory",
       "kind" : "remoteSourceControl",
@@ -26,6 +17,15 @@
       "state" : {
         "revision" : "d273b5b7025d386feef79ef6bad7de762e106eaf",
         "version" : "4.2.0"
+      }
+    },
+    {
+      "identity" : "rainbow",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/onevcat/Rainbow.git",
+      "state" : {
+        "revision" : "0c627a4f8a39ef37eadec1ceec02e4a7f55561ac",
+        "version" : "4.1.0"
       }
     },
     {

@@ -7,7 +7,6 @@
 
 import Factory
 import ArgumentParser
-import ANSITerminal
 
 struct WheelTool: AsyncParsableCommand {
     static var configuration: CommandConfiguration {
@@ -19,6 +18,6 @@ struct WheelTool: AsyncParsableCommand {
     public func run() async throws {
         @Injected(\.wheelEngine) var wheelEngine
         let choosedOption = try await wheelEngine.runWheel()
-        choosedOption.readableColored()
+        print(choosedOption.readable)
     }
 }

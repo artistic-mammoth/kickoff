@@ -5,7 +5,7 @@
 //  Created by Mikhaylov Aleksandr on 05.05.2025.
 //
 
-import ANSITerminal
+import Rainbow
 
 typealias WheelOptions = [WheelOption]
 
@@ -23,14 +23,8 @@ extension WheelOption {
 
 extension WheelOption {
     var readable: String {
-        "TYPE: " + type.rawValue + " - " + name
-    }
-    
-    func readableColored() {
-        moveLineDown()
-        write(type.readable.italic.green)
-        write(": ".italic.green)
-        write(name.bold.white)
-        writeln()
+        type.readable.italic.green +
+        ": ".italic.green +
+        name.bold.white
     }
 }

@@ -7,7 +7,6 @@
 
 import Factory
 import ArgumentParser
-import ANSITerminal
 
 struct AddTool: AsyncParsableCommand {
     static var configuration: CommandConfiguration {
@@ -21,7 +20,13 @@ struct AddTool: AsyncParsableCommand {
     
     public func run() async throws {
         @Injected(\.wheelEngine) var wheelEngine
-        let task = ask("What to add?\n")
+        print("What to add?")
+        let task = readLine()
+        
+        guard let task else {
+            throw KickOffError.any
+        }
+        
         try await wheelEngine.addOption(of: type, task)
         print("Successfully added")
     }
