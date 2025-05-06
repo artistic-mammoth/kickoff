@@ -1,5 +1,5 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
+// Copyright (C) 2025 Mikhaylov Aleksandr <github:artistic-mammoth>
+// Created for kickoff
 
 import ArgumentParser
 
@@ -7,11 +7,12 @@ import ArgumentParser
 struct KickOff: AsyncParsableCommand {
     static let configuration: CommandConfiguration = CommandConfiguration(
         commandName: "kickoff",
+        abstract: "Decide what to do next",
+        version: "kickoff 1.0.0",
         subcommands: [
-            WheelTool.self,
-            AddTool.self,
-            TasksTool.self
+            WheelCommand.self,
+            TasksCommand.self
         ],
-        defaultSubcommand: WheelTool.self
+        defaultSubcommand: WheelCommand.self
     )
 }

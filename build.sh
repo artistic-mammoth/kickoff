@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Copyright (C) 2025 Mikhaylov Aleksandr <github:artistic-mammoth>
+# Created for kickoff
+# usage place kickoff executable from output to /usr/local/bin
+
 echo "🔧 Building Swift project in release mode..."
 if swift build -c release; then
     echo "✅ Build completed successfully."

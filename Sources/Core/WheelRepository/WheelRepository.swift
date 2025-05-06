@@ -1,20 +1,17 @@
-//
-//  WheelRepository.swift
-//  wheel-of-tasks
-//
-//  Created by Mikhaylov Aleksandr on 05.05.2025.
-//
+// Copyright (C) 2025 Mikhaylov Aleksandr <github:artistic-mammoth>
+// Created for kickoff
 
 import Foundation
 import Files
 
 protocol IWheelRepository {
-    func get() async -> WheelOptions
-    func add(_ option: WheelOption) async throws
+    func get() async -> WheelTasks
+    func add(_ task: WheelTask) async throws
+    func add(with name: String, of kind: WheelTask.Kind, priority: WheelTask.Priority) async throws
 }
 
 final actor WheelRepository {
-    private var options: WheelOptions = []
+    private var tasks: WheelTasks = []
     
     init() {
         // TODO: Make it safe
@@ -25,13 +22,23 @@ final actor WheelRepository {
 }
 
 extension WheelRepository: IWheelRepository {
-    func get() async -> WheelOptions {
-        options
+    func get() async -> WheelTasks {
+        tasks
     }
     
-    func add(_ option: WheelOption) async throws {
-        options.append(option)
+    func add(_ task: WheelTask) async throws {
+        tasks.append(task)
         try save()
+    }
+    
+    func add(with name: String, of kind: WheelTask.Kind, priority: WheelTask.Priority) async throws {
+        let task = WheelTask(
+            name: name,
+            kind: kind,
+            priority: priority
+        )
+        
+        try await add(task)
     }
 }
 
@@ -49,8 +56,8 @@ private extension WheelRepository {
         let decoder = JSONDecoder()
         
         do {
-            let temp = try decoder.decode(WheelOptions.self, from: try file.read())
-            self.options = temp
+            let temp = try decoder.decode(WheelTasks.self, from: try file.read())
+            self.tasks = temp
         } catch {
             // debugPrint("DEBUG: Cannot parse saves")
         }
@@ -60,7 +67,7 @@ private extension WheelRepository {
         let file = try getSaveFile()
         let encoder = JSONEncoder()
         
-        let encoded = try encoder.encode(options)
+        let encoded = try encoder.encode(tasks)
         try file.write(encoded)
     }
     

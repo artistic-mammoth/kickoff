@@ -1,9 +1,5 @@
-//
-//  WheelOfTasksError.swift
-//  wheel-of-tasks
-//
-//  Created by Mikhaylov Aleksandr on 05.05.2025.
-//
+// Copyright (C) 2025 Mikhaylov Aleksandr <github:artistic-mammoth>
+// Created for kickoff
 
 import Foundation
 

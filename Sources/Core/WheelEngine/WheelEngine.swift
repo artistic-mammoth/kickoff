@@ -1,70 +1,37 @@
-//
-//  WheelEngine.swift
-//  wheel-of-tasks
-//
-//  Created by Mikhaylov Aleksandr on 05.05.2025.
-//
+// Copyright (C) 2025 Mikhaylov Aleksandr <github:artistic-mammoth>
+// Created for kickoff
 
 import Factory
 
 protocol IWheelEngine {
-    func runWheel() async throws -> WheelOption
-    func addOption(of type: String, _ option: String) async throws
-    func printAll() async
+    func spin() async throws -> WheelTask
 }
 
 final class WheelEngine {
-    
     @Injected(\.randomizeClient) private var randomizeClient
     @Injected(\.wheelRepository) private var wheelRepository
 }
 
 extension WheelEngine: IWheelEngine {
-    func runWheel() async throws -> WheelOption {
-        let options = await wheelRepository.get()
-        var choosedOption: WheelOption = .empty
-        
-        choosedOption = try await decide(from: options)
-        
-        return choosedOption
-    }
-    
-    func addOption(of type: String, _ option: String) async throws {
-        let cleanType = type
-            .lowercased()
-            .replacingOccurrences(of: " ", with: "")
-        
-        let type = WheelType(rawValue: cleanType)
-        
-        guard let type else {
-            throw KickOffError.any
-        }
-        
-        let option = WheelOption(
-            name: option,
-            type: type
-        )
-        
-        try await wheelRepository.add(option)
-    }
-    
-    func printAll() async {
-        let all = await wheelRepository.get()
-        all.forEach {
-            print($0.type.readable, $0.name)
-        }
+    func spin() async throws -> WheelTask {
+        let tasks = await wheelRepository.get()
+        let choosedTask = try await decide(from: tasks)
+        return choosedTask
     }
 }
 
 private extension WheelEngine {
-    func decide(from options: WheelOptions) async throws -> WheelOption {
+    func decide(from tasks: WheelTasks) async throws -> WheelTask {
         let index = try randomizeClient
-            .calculate(for: options
+            .calculate(for: tasks
                 .enumerated()
                 .map {
-                    RandomElement(id: $0.offset, weight: $0.element.type.weight)
+                    RandomElement(
+                        id: $0.offset,
+                        probability: $0.element.priority.weight
+                    )
                 })
         
-        return options[index]
+        return tasks[index]
     }
 }

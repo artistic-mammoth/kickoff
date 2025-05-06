@@ -1,9 +1,5 @@
-//
-//  RandomizeClient.swift
-//  wheel-of-tasks
-//
-//  Created by Mikhaylov Aleksandr on 05.05.2025.
-//
+// Copyright (C) 2025 Mikhaylov Aleksandr <github:artistic-mammoth>
+// Created for kickoff
 
 protocol IRandomizeClient {
     func calculateIndex(upto max: Int) throws -> Int
@@ -25,7 +21,7 @@ extension RandomizeClient: IRandomizeClient {
         var computedElements: [T] = []
         
         elements.forEach {
-            computedElements.append(contentsOf: Array(repeating: $0.id, count: $0.weight))
+            computedElements.append(contentsOf: Array(repeating: $0.id, count: $0.probability))
         }
         
         let choosedIndex = try calculateIndex(upto: computedElements.endIndex)
