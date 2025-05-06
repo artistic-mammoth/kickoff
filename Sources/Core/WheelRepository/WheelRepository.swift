@@ -16,7 +16,8 @@ final actor WheelRepository {
     
     init() {
         // TODO: Make it safe
-        SyncTask { [weak self] in
+        // Note: the init for DI cannot be run in async contex
+        Task.synchronous { [weak self] in
             await self?.loadFromDisk()
         }
     }
@@ -57,13 +58,13 @@ extension WheelRepository: IWheelRepository {
 private extension WheelRepository {
     func loadFromDisk() {
         do {
-            try load(file: "")
+            try load()
         } catch {
             fatalError("Cannot parse saves")
         }
     }
     
-    func load(file fileName: String) throws {
+    func load() throws {
         let file = try getSaveFile()
         let decoder = JSONDecoder()
         
@@ -85,8 +86,22 @@ private extension WheelRepository {
     }
     
     func getSaveFile() throws -> File {
-        let folder = try Folder.home.createSubfolderIfNeeded(withName: ".kickoff")
-        let file = try folder.createFileIfNeeded(withName: "save.json")
+        let folder = try Folder
+            .home
+            .createSubfolderIfNeeded(
+                withName: Self.storageDirectoryName
+            )
+        
+        let file = try folder
+            .createFileIfNeeded(
+                withName: Self.saveFileName
+            )
+        
         return file
     }
+}
+
+extension WheelRepository {
+    private static let storageDirectoryName: String = ".kickoff"
+    private static let saveFileName: String = "save.json"
 }
