@@ -78,6 +78,7 @@ private extension WheelRepository {
     func save() throws {
         let file = try getSaveFile()
         let encoder = JSONEncoder()
+        encoder.outputFormatting = .prettyPrinted
         
         let encoded = try encoder.encode(tasks)
         try file.write(encoded)
