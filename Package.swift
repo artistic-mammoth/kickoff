@@ -8,7 +8,7 @@ let package = Package(
         .macOS(.v15)
     ],
     dependencies: [
-        // TODO: TRY
+        // TODO: Try
         // .package(url: "https://github.com/vapor/console-kit.git", from: "4.0.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "1.0.0"),
         .package(url: "https://github.com/johnsundell/files.git", from: "4.0.0"),
@@ -19,7 +19,7 @@ let package = Package(
         .executableTarget(
             name: "kickoff",
             dependencies: [
-                // TODO: TRY
+                // TODO: Try
                 // .product(name: "ConsoleKit", package: "console-kit"),
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
                 .product(name: "Files", package: "files"),

@@ -10,7 +10,7 @@ struct RandomizeClient { }
 
 extension RandomizeClient: IRandomizeClient {
     func calculateIndex(upto max: Int) throws -> Int {
-        guard max != 0 else {
+        guard max > 0 else {
             throw KickOffError.any
         }
         

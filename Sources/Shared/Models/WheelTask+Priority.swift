@@ -2,7 +2,7 @@
 // Created for kickoff
 
 extension WheelTask {
-    enum Priority: Int, Codable {
+    enum Priority: String, Codable {
         case low
         case medium
         case high

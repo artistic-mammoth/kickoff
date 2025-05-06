@@ -3,6 +3,7 @@
 
 import Foundation
 
+// TODO: Make it safe
 struct SyncTask<T: Sendable> {
     let result: T?
     

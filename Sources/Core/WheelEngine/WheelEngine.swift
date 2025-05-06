@@ -15,6 +15,11 @@ final class WheelEngine {
 extension WheelEngine: IWheelEngine {
     func spin() async throws -> WheelTask {
         let tasks = await wheelRepository.get()
+        
+        guard tasks.count > 1 else {
+            throw KickOffError.any
+        }
+        
         let choosedTask = try await decide(from: tasks)
         return choosedTask
     }
