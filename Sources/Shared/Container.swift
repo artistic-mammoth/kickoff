@@ -17,4 +17,8 @@ extension Container {
     var randomizeClient: Factory<IRandomizeClient> {
         self { RandomizeClient() }
     }
+    
+    var userInputTool: Factory<IUserInputTool> {
+        self { UserInputTool() }
+    }
 }

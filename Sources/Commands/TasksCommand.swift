@@ -10,7 +10,8 @@ struct TasksCommand: AsyncParsableCommand {
             commandName: "tasks",
             abstract: "Prints all tasks",
             subcommands: [
-                AddCommand.self
+                AddCommand.self,
+                RemoveCommand.self
             ]
         )
     }

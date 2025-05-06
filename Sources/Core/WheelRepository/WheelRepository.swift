@@ -8,6 +8,7 @@ protocol IWheelRepository {
     func get() async -> WheelTasks
     func add(_ task: WheelTask) async throws
     func add(with name: String, of kind: WheelTask.Kind, priority: WheelTask.Priority) async throws
+    func remove(named: String) async throws
 }
 
 final actor WheelRepository {
@@ -39,6 +40,17 @@ extension WheelRepository: IWheelRepository {
         )
         
         try await add(task)
+    }
+    
+    func remove(named: String) async throws {
+        guard let index = tasks.firstIndex(where: {
+            $0.name.localizedStandardContains(named)
+        }) else {
+            throw KickOffError.any
+        }
+        
+        tasks.remove(at: index)
+        try save()
     }
 }
 

@@ -4,38 +4,28 @@
 import Factory
 import ArgumentParser
 
-struct AddCommand: AsyncParsableCommand {
+struct RemoveCommand: AsyncParsableCommand {
     static var configuration: CommandConfiguration {
         CommandConfiguration(
-            commandName: "add",
-            abstract: "Add new task"
+            commandName: "remove",
+            abstract: "Remove specific task"
         )
     }
     
-    @Option(name: .shortAndLong, help: "Kind of task")
-    public var kind: WheelTask.Kind?
-    
     @Option(name: .shortAndLong, help: "Name of task")
     public var named: String?
-    
-    @Option(name: .shortAndLong, help: "Priority of task")
-    public var priority: WheelTask.Priority?
     
     public func run() async throws {
         @Injected(\.wheelRepository) var wheelRepository
         @Injected(\.userInputTool) var userInputTool
         
         let name = try userInputTool.read(
-            quote: "What task to add?",
+            quote: "What task to remove?",
             default: named
         )
         
-        try await wheelRepository.add(
-            with: name,
-            of: kind ?? .basic,
-            priority: priority ?? .medium
-        )
+        try await wheelRepository.remove(named: name)
         
-        print("Successfully added")
+        print("Successfully removed")
     }
 }
